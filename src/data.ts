@@ -1,4 +1,4 @@
-import { Question } from './pages/stores/QuizStore';
+import { Question } from './interfaces/interfaces';
 
 export const questions: Question[] = [
   {

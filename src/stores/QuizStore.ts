@@ -1,29 +1,25 @@
 import { create } from 'zustand';
-import { questions } from '../../data';
-
-export interface Question {
-  id: number;
-  questionText: string;
-  options: { text: string; isCorrect: boolean }[];
-}
+import { Question } from '../interfaces/interfaces';
 
 interface QuizState {
   questions: Question[];
   currentQuestionIndex: number;
   quizCompleted: boolean;
   score: number;
+  setQuestions: (newScore: Question[]) => void;
   setScore: (newScore: number) => void;
   selectAnswer: (answer: string) => void;
   resetScore: () => void;
 }
 
 export const useQuizStore = create<QuizState>((set, get) => ({
-  questions: questions,
+  questions: [],
   currentQuestionIndex: 0,
   quizCompleted: false,
   score: 0,
+  setQuestions: (newQuestions) => set({questions: newQuestions}),
   setScore: (newScore) => set({ score: newScore }),
-  resetScore: () => set({ score: 0, currentQuestionIndex: 0, quizCompleted: false }),
+  resetScore: () => set({ questions: [], score: 0, currentQuestionIndex: 0, quizCompleted: false }),
   selectAnswer: (answer: string) => {
     const { questions, currentQuestionIndex, score } = get();
     const currentQuestion = questions[currentQuestionIndex];

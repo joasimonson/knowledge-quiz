@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuizStore } from '../stores/QuizStore';
+import { useQuizStore } from '../../stores/QuizStore';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 

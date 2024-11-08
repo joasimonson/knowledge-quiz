@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuizStore } from '../stores/QuizStore';
+import { useQuizStore } from '../../stores/QuizStore';
+import { Question } from '../../interfaces/interfaces';
 import './index.css';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const { setScore } = useQuizStore()
+  const { setScore, setQuestions } = useQuizStore()
+
+  useEffect(() => {
+    async function getQuestions() {
+      const response = await fetch('api/questions');
+      const data = await response.json() as Question[];
+      setQuestions(data);
+    }
+    getQuestions();
+  })
 
   const handleStartQuiz = () => {
     setScore(0);
